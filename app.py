@@ -179,44 +179,40 @@ section[data-testid="stSidebar"] .stSelectbox>div>div{
     box-shadow:0 0 18px rgba(59,130,246,0.12)!important;
 }
 [data-testid="stFileUploader"] section{
-    display:flex!important;
-    flex-direction:column!important;
-    align-items:center!important;
     padding:.75rem .5rem!important;
-    overflow:hidden!important;
+    overflow:visible!important;
+    flex-wrap:wrap!important;
 }
 [data-testid="stFileUploaderDropzone"]{
-    display:flex!important;
-    flex-direction:column!important;
-    align-items:center!important;
-    text-align:center!important;
-    overflow:hidden!important;
+    overflow:visible!important;
+    flex-wrap:wrap!important;
+    row-gap:8px!important;
 }
 [data-testid="stFileUploaderDropzone"] > div{
-    display:flex!important;
-    flex-direction:column!important;
-    align-items:center!important;
-    gap:4px!important;
-    overflow:hidden!important;
+    overflow:visible!important;
     white-space:normal!important;
     word-break:break-word!important;
     font-size:.75rem!important;
+    min-width:0!important;
 }
 [data-testid="stFileUploaderDropzone"] small{
     font-size:.68rem!important;
     color:#475569!important;
-    text-align:center!important;
     display:block!important;
 }
 [data-testid="stFileUploaderDropzone"] button{
-    background:linear-gradient(135deg,rgba(29,78,216,0.3),rgba(99,102,241,0.3))!important;
-    border:1px solid rgba(59,130,246,0.4)!important;
+    background:linear-gradient(135deg,rgba(29,78,216,0.55),rgba(99,102,241,0.55))!important;
+    border:1px solid rgba(59,130,246,0.6)!important;
     border-radius:8px!important;
-    color:#93c5fd!important;
+    color:#ffffff!important;
     font-size:.75rem!important;
     font-weight:600!important;
     padding:4px 14px!important;
-    margin-top:4px!important;
+    opacity:1!important;
+    visibility:visible!important;
+    position:relative!important;
+    z-index:2!important;
+    flex-shrink:0!important;
 }
 
 /* ── Upload card shell ── */
