@@ -287,6 +287,126 @@ summary{color:#475569!important;}
 
 /* ── Alerts ── */
 div[data-testid="stAlert"]{border-radius:10px!important;}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESPONSIVE LAYER — mobile & tablet adjustments only.
+   No colors, gradients, fonts, borders, animations, or component styles
+   are changed above; these rules only adjust sizing/spacing/wrapping so
+   nothing clips, overlaps, or forces horizontal scroll on small screens.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Belt-and-braces: never allow sideways scrolling regardless of viewport */
+html, body, .stApp { overflow-x: hidden !important; max-width: 100vw; }
+.main .block-container{ overflow-x: hidden; }
+
+/* Make every image / chart / iframe / plotly figure fluid */
+img, svg, canvas, .stPlotlyChart, .js-plotly-plot, iframe {
+    max-width: 100% !important;
+    height: auto;
+}
+.stPlotlyChart, .js-plotly-plot { width: 100% !important; }
+
+/* Ensure Streamlit's own column layout stacks on small screens
+   (Streamlit already does this by default via its own breakpoints;
+   this reinforces it without altering desktop column widths) */
+@media (max-width: 640px){
+    div[data-testid="column"]{ width:100% !important; flex:1 1 100% !important; min-width:100% !important; }
+}
+
+/* Tables / dataframes stay within viewport and scroll internally, not the page */
+[data-testid="stTable"], [data-testid="stDataFrame"]{
+    max-width:100% !important;
+    overflow-x:auto !important;
+    -webkit-overflow-scrolling:touch;
+}
+
+/* Long unbroken strings (emails, urls, filenames) wrap instead of clipping */
+.iv, .ik, .ir, .glass, .fb-i, .pill, .sig-row, .rb-row, .hero-sub, .hero-title {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* Tablet range */
+@media (max-width: 992px){
+    .main .block-container{ padding:1rem 1.2rem 2rem; }
+    .hero{ padding:2rem 1.6rem; }
+    .hero-title{ font-size:1.9rem; }
+    .hero-stats{ gap:1.6rem; }
+    .tiles{ gap:8px; }
+    .tile{ min-width:100px; }
+}
+
+/* Mobile phones */
+@media (max-width: 640px){
+    .main .block-container{ padding:.8rem .8rem 2rem; max-width:100%; }
+
+    /* Hero */
+    .hero{ padding:1.4rem 1.1rem; border-radius:16px; margin-bottom:1.2rem; }
+    .hero-title{ font-size:1.5rem; }
+    .hero-sub{ font-size:.82rem; max-width:100%; }
+    .hero-badge{ font-size:.62rem; padding:3px 10px; }
+    .hero-stats{ gap:1rem 1.4rem; }
+    .hs-num{ font-size:1.3rem; }
+    .hs-lbl{ font-size:.6rem; }
+    .hero > div:first-child{ flex-direction:column; align-items:flex-start!important; gap:8px; }
+
+    /* Metric tiles stack two-per-row instead of clipping */
+    .tiles{ gap:8px; }
+    .tile{ min-width: calc(50% - 8px); flex: 1 1 calc(50% - 8px); }
+    .tile .v{ font-size:1.35rem; }
+
+    /* Glass cards / upload cards get tighter padding */
+    .glass{ padding:1.1rem 1rem; }
+    .upload-card{ padding:1rem .8rem .8rem; margin-bottom:.8rem; }
+
+    /* Note banner stacks icon above text and wraps cleanly */
+    .note-banner{ flex-direction:column; align-items:flex-start; gap:.4rem; padding:.8rem 1rem; }
+
+    /* Section headings wrap gracefully */
+    .sh{ font-size:.63rem; flex-wrap:wrap; }
+
+    /* ATS banner: stack number + text instead of a tight row */
+    .ats-banner{ flex-direction:column; align-items:flex-start; gap:.6rem; padding:1.2rem 1.3rem; }
+    .ats-num{ font-size:2.8rem; }
+
+    /* Info rows wrap instead of forcing a fixed key column */
+    .ir{ flex-wrap:wrap; }
+    .ik{ min-width:0; flex:1 1 100%; }
+    .iv{ flex:1 1 100%; }
+
+    /* Pills wrap naturally (already inline-block) but shrink slightly */
+    .pill{ font-size:.68rem; padding:3px 10px; }
+
+    /* Tabs: allow horizontal scroll within the tab bar itself only,
+       so the page body never scrolls sideways */
+    div[data-baseweb="tab-list"]{
+        overflow-x:auto !important;
+        overflow-y:hidden;
+        flex-wrap:nowrap !important;
+        -webkit-overflow-scrolling:touch;
+    }
+    button[data-baseweb="tab"]{ font-size:.74rem!important; padding:.5rem .6rem!important; white-space:nowrap; }
+
+    /* File uploader shrinks its own text/icons rather than overflowing */
+    [data-testid="stFileUploaderDropzone"]{ padding:.4rem!important; }
+    [data-testid="stFileUploaderDropzone"] > div{ font-size:.68rem!important; }
+    [data-testid="stFileUploaderDropzone"] button{ font-size:.68rem!important; padding:4px 10px!important; }
+
+    /* Buttons full-width and comfortably tappable */
+    .stButton>button{ font-size:.8rem!important; padding:.55rem .8rem!important; width:100% !important; }
+    [data-testid="stDownloadButton"]>button{ width:100% !important; }
+    a[data-testid="stLinkButton"]{ width:100% !important; }
+
+    /* Sidebar content doesn't overflow narrow drawers */
+    section[data-testid="stSidebar"]{ min-width: 0 !important; }
+}
+
+/* Very small phones */
+@media (max-width: 380px){
+    .hero-title{ font-size:1.3rem; }
+    .ats-num{ font-size:2.2rem; }
+    .tile{ min-width: 100%; flex: 1 1 100%; }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -397,8 +517,7 @@ st.markdown("""
 <div class="note-banner">
   <span style="font-size:1.2rem">📌</span>
   <div>
-    <strong>Note:</strong> Upload resume PDF first (required for analysis).
-    Add job description PDF to unlock full 4-signal ATS score.
+    Note: Upload your Resume PDF in both the Resume PDF and Job Description PDF sections to receive the complete analysis and accurate output.
   </div>
 </div>""", unsafe_allow_html=True)
 
