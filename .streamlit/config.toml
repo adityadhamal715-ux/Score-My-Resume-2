@@ -1,0 +1,15 @@
+[server]
+# Fixes "file upload fails / red error icon" on Streamlit Cloud deployments.
+# Locally there's no reverse proxy, so the XSRF cookie round-trips fine.
+# Once deployed, the app sits behind a proxy and mobile browsers (and some
+# desktop browsers with strict SameSite cookie rules) block that cookie,
+# causing the upload POST request to be rejected (403) before your script
+# even runs. Disabling XSRF protection for the uploader endpoint resolves it.
+enableXsrfProtection = false
+enableCORS = false
+
+# Explicit upload limit (MB) so it matches validate_pdf_file's MAX_PDF_SIZE_MB in utils.py
+maxUploadSize = 50
+
+[browser]
+gatherUsageStats = false
